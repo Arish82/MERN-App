@@ -22,17 +22,17 @@ export default function Login() {
             theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
         }}
       >
-        <CardContent style={{width: "70%"}} >
-          <Typography sx={{textAlign: "center"}} className='heading' gutterBottom variant="h4" component="div">
+        <CardContent  style={{width: "70%"}} >
+          <Typography sx={{textAlign: "center"}} className='heading fonts purple-color' gutterBottom variant="h4" component="div">
             Login Page
           </Typography>  
           <form className='form'>
             <FormField label="Your Email" icon="Email" />
             <FormField label="Password" icon="Password" />
-            <Button type="submit" style={{width: "100%", marginLeft: "0.5em", marginTop: "0.5em", fontSize: "1.3em"}} variant="contained" endIcon={<SendIcon />}>
+            <Button className='button-gradient' type="submit" style={{width: "100%", marginLeft: "0.5em", marginTop: "0.5em", fontSize: "1.3em"}} variant="" endIcon={<SendIcon />}>
               Login
             </Button>
-            <Typography style={{marginTop: "0.5em", textAlign: "center"}} variant="button" display="block" gutterBottom>
+            <Typography className='dark-color fonts' style={{marginTop: "1em", textAlign: "center", fontWeight: "700"}} variant="" display="block" gutterBottom>
               <Link to="/register">Create an Account</Link>
             </Typography>
           </form>

@@ -13,6 +13,16 @@
 .heading{
     font-weight: 600 !important;
 }
+
+.purple-font{
+    font-weight: 700;
+    /* font-size: 24px; */
+    color: #6944ff;
+    /* margin-bottom: 15px; */
+}
 .textfield{
     width: 100% !important;
+    font-family: 'Quicksand', sans-serif !important;
+    border-color: #6944ff !important;
+    color: #6944ff !important;
 }

@@ -19,7 +19,7 @@ const Item = styled(Paper)(({ theme }) => ({
 export default function ContactForm() {
   return (
     <div style={{
-        marginTop: "2em"
+        marginTop: "1em"
     }} >
       <Paper
         elevation={3}
@@ -34,7 +34,7 @@ export default function ContactForm() {
         }}
       >
         <CardContent style={{width: "90%"}} >
-          <Typography sx={{textAlign: ""}} className='heading' gutterBottom variant="h4" component="div">
+          <Typography sx={{textAlign: ""}} className='heading fonts dark-color' gutterBottom variant="h4" component="div">
             Get in Touch
           </Typography>  
           <form>
@@ -63,7 +63,10 @@ export default function ContactForm() {
                     }}
                 />
             </Grid>
-            <Button type="submit" style={{marginTop: "1em"}} variant="contained" endIcon={<SendIcon />}>
+            <Button className='button-gradient fonts' type="submit" style={{marginTop: "1em", 
+            fontSize: "1em"
+            // backgroundColor: "#6944ff"
+            }} variant="" endIcon={<SendIcon />}>
               Send Message
             </Button>
           </form>

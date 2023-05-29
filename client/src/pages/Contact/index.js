@@ -6,6 +6,7 @@ import PhoneAndroidIcon from '@mui/icons-material/PhoneAndroid';
 import EmailIcon from '@mui/icons-material/Email';
 import HomeIcon from '@mui/icons-material/Home';
 import ContactForm from '../../components/ContactForm';
+import DetailsCard from '../../components/DetailsCard';
 
 
 const Item = styled(Paper)(({ theme }) => ({
@@ -17,17 +18,24 @@ const Item = styled(Paper)(({ theme }) => ({
 }));
 
 export default function Contact() {
+  const element=[<PhoneAndroidIcon/>, <EmailIcon/>, <HomeIcon/>]
   return (
     <>
       <Container sx={{ marginTop: "3em" }}>
         <Box>
-          <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 5 }}>
-            <Grid item xs={2} sm={4} md={4}>
+          <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 2 }}>
+            <DetailsCard element={element[0]}  />
+            <DetailsCard element={element[1]}  />
+            <DetailsCard element={element[2]}  />.
+
+            {/* <Grid item xs={2} sm={4} md={4}>
               <Item >
                 <PhoneAndroidIcon />
                 <Grid item xs>
                   <Typography gutterBottom variant="h5" component="div">
-                    Standard license
+                   
+                      Standard license
+                
                   </Typography>
                   <Typography variant="body2" gutterBottom>
                     {8318090814}
@@ -60,7 +68,7 @@ export default function Contact() {
                   </Typography>
                 </Grid>
               </Item>
-            </Grid>
+            </Grid> */}
           </Grid>
         </Box>
         <ContactForm/>

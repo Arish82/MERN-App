@@ -7,8 +7,22 @@ import FormField from "../../components/FormField"
 import Button from '@mui/material/Button';
 import SendIcon from '@mui/icons-material/Send';
 import { Link } from 'react-router-dom';
+import PersonIcon from '@mui/icons-material/Person';
+import EmailIcon from '@mui/icons-material/Email';
+import WorkIcon from '@mui/icons-material/Work';
+import CallIcon from '@mui/icons-material/Call';
+import LockIcon from '@mui/icons-material/Lock';
+import LockOpenIcon from '@mui/icons-material/LockOpen';
 
-
+// const icons=[<PersonIcon />, <EmailIcon />, <WorkIcon />, <CallIcon />, <LockIcon />, <LockOpenIcon />]
+const icons={
+  "Name"  :<PersonIcon />,
+  "Email"  :<EmailIcon />,
+  "Contact"  :<WorkIcon />,
+  "Profession"  :<CallIcon />,
+  "Password"  :<LockIcon />,
+  "CPassword"  :<LockOpenIcon />
+  }
 export default function Register() {
   return (
     <div className='register-container' >
@@ -17,8 +31,6 @@ export default function Register() {
         className='form-container'
         sx={{
           p: 1,
-          pt: 2,
-          pb: 2,
           margin: 'auto',
           marginTop: "0.5em",
           maxWidth: 500,
@@ -27,22 +39,22 @@ export default function Register() {
             theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
         }}
       >
-        <CardContent style={{width: "65%"}} >
-          <Typography sx={{textAlign: "center"}} className='heading' gutterBottom variant="h4" component="div">
+        <CardContent style={{width: "72%"}} >
+          <Typography sx={{textAlign: "center"}} className='heading fonts purple-color' gutterBottom variant="h4" component="div">
             Register
           </Typography>  
           <form className='form'>
-            <FormField label="Your Name" icon="Name" />
-            <FormField label="Your Email" icon="Email" />
-            <FormField label="Mobile Number" icon="Contact" />
-            <FormField label="Your Profession" icon="Profession" />
-            <FormField label="Password" icon="Password" />
-            <FormField label="Confirm Password" icon="CPassword" />
+            <FormField icon={icons["Email"]}  label="Your Email" />
+            <FormField icon={icons["Name"]}  label="Your Name" />
+            <FormField icon={icons["Contact"]}  label="Mobile Number" />
+            <FormField icon={icons["Profession"]}  label="Your Profession" />
+            <FormField icon={icons["Password"]}  label="Password" />
+            <FormField icon={icons["CPassword"]}  label="Confirm Password" />
             
-            <Button type="submit" style={{width: "100%", marginLeft: "0.5em",  fontSize: "1.3em"}} variant="contained" endIcon={<SendIcon />}>
+            <Button className='button-gradient' type="submit" style={{width: "100%", marginLeft: "0.5em",  fontSize: "1.2em"}} variant="" endIcon={<SendIcon />}>
               Register
             </Button>
-            <Typography style={{marginTop: "0.3em", textAlign: "center"}} variant="button" display="block" gutterBottom>
+            <Typography className='dark-color fonts' style={{marginTop: "0.3em", textAlign: "center", fontWeight: "700"}} variant="" display="block" gutterBottom>
               <Link to="/login">Already have an account</Link>
             </Typography>
           </form>
@@ -51,3 +63,11 @@ export default function Register() {
     </div>
   );
 }
+
+
+
+
+
+
+
+

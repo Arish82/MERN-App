@@ -1,0 +1,18 @@
+.register-container{
+    display: flex;
+    min-height: 85vh;
+}
+.form-container{
+    display: flex;
+    justify-content: center;
+}
+.container{
+    min-height: 100vh;
+    background-color: #d9dadc;
+}
+.heading{
+    font-weight: 600 !important;
+}
+.textfield{
+    width: 100% !important;
+}

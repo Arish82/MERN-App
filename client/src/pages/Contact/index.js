@@ -1,5 +1,5 @@
 import { Box, Container, Grid, Typography, containerClasses } from '@mui/material'
-import React from 'react'
+import React, {useEffect, useState} from 'react'
 import { styled } from '@mui/material/styles';
 import Paper from '@mui/material/Paper';
 import PhoneAndroidIcon from '@mui/icons-material/PhoneAndroid';
@@ -19,6 +19,34 @@ const Item = styled(Paper)(({ theme }) => ({
 
 export default function Contact() {
   const element=[<PhoneAndroidIcon/>, <EmailIcon/>, <HomeIcon/>]
+
+  const [userData, setUserData] = useState({
+    name: "",email: "", phone: ""
+  })
+  const handleAboutMe= async ()=>{
+    try{
+      const res= await fetch("/aboutme",{
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json"
+        }
+      })
+      const data= await res.json();
+      setUserData({
+        name: data.name,email: data.email, phone: data.phone
+      })
+      if(!(res.status === 200)){
+        throw new Error(res.error);
+      }
+    }catch(err){
+      console.log(err);
+    }
+  }
+
+  useEffect(() => {
+    handleAboutMe();
+  }, [])
+  console.log(userData);
   return (
     <>
       <Container sx={{ marginTop: "3em" }}>
@@ -71,7 +99,7 @@ export default function Contact() {
             </Grid> */}
           </Grid>
         </Box>
-        <ContactForm/>
+        <ContactForm userData={userData} setUserData={setUserData} />
         
 
       </Container>

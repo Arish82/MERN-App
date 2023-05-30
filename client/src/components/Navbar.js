@@ -21,11 +21,12 @@ const pages = {
   'About Me': "/aboutme",
   'Contact': "/contact",
   "Login": "/login",
-  "Register": "/register"
+  "Register": "/register",
+  // "Logout": "/logout"
 };
 
 
-function Navbar() {
+function Navbar(props) {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
   return (
@@ -81,13 +82,20 @@ function Navbar() {
                 display: { xs: 'block', md: 'none' },
               }}
             >
-              {Object.entries(pages).map(([key,value]) => (
-                <Link key={key} to={value} >
-                  <MenuItem onClick={(event)=>setAnchorElNav(null)}>
-                    <Typography sx={{fontFamily: "Quicksand"}} textAlign="center">{key}</Typography>
-                  </MenuItem>
-                </Link>
-              ))}
+              {Object.entries(pages).map(([key,value]) => {
+                return (
+                  <div key={key} >
+                    {
+                      (<Link to={value} >
+                        <MenuItem onClick={(event)=>setAnchorElNav(null)}>
+                          <Typography sx={{fontFamily: "Quicksand"}} textAlign="center">{key}</Typography>
+                        </MenuItem>
+                      </Link>)
+                    }
+                  </div>
+                )
+              } 
+              )}
             </Menu>
           </Box>
           
@@ -111,16 +119,35 @@ function Navbar() {
             Arish
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
-            {Object.entries(pages).map(([key,value]) => (
-              <Link key={key} to={value} >
-                <Button
-                  onClick={(event)=> setAnchorElNav(null)}
-                  sx={{ my: 2, color: 'white', display: 'block' }}
-                >
-                  {key}
-                </Button>
-              </Link>
-            ))}
+            {Object.entries(pages).map(([key,value]) => {
+              let c=true;
+              if(key==="Login" || key==="Register") c=false;
+              return (
+                <div key={key}>
+                  {
+                    (!props.login || c ) &&
+                    <Link to={value} >
+                      <Button
+                        onClick={(event)=> setAnchorElNav(null)}
+                        sx={{ my: 2, color: 'white', display: 'block' }}
+                      >
+                        {key}
+                      </Button>
+                    </Link>
+                  }
+                </div>
+              )
+            })}
+            {
+              props.login &&
+              <Link to={"/logout"} >
+              <Button
+                onClick={(event)=> setAnchorElNav(null)}
+                sx={{ my: 2, color: 'white', display: 'block' }}
+              >
+                Logout
+              </Button>
+            </Link>}
           </Box>
 
           {/* <Box sx={{ flexGrow: 0 }}>

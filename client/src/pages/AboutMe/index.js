@@ -1,7 +1,40 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import "./index.scss"
+import {useNavigate} from "react-router-dom"
 
 export default function AboutMe() {
+  const [userData, setuserData] = useState({})
+  const navigate=useNavigate();
+  const handleAboutMe= async ()=>{
+    try{
+      const res= await fetch("/aboutme",{
+        method: "GET",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json"
+        },
+        credentials: "include"
+      })
+
+      const data= await res.json();
+      setuserData(data)
+
+      if(!(res.status === 200)){
+        navigate("/login")
+        throw new Error(res.error);
+      }
+      
+    }catch(err){
+      navigate("/login")
+      console.log(err);
+    }
+  }
+
+  useEffect(() => {
+    handleAboutMe();
+  }, [])
+  
+  console.log(userData);
   return (
     <div>
       <div className="wrapper">
@@ -11,17 +44,23 @@ export default function AboutMe() {
           </div>
 
           <div className="profile-card__cnt js-profile-cnt">
-            <div className="profile-card__name">Muhammed Erdem</div>
-            <div className="profile-card__txt">Front-end Developer from <strong>Mesopotamia</strong></div>
+            <div className="profile-card__name">{userData && userData.name}</div>
+            <div className="profile-card__txt">{userData && userData.work} from <strong>{"India"}</strong></div>
+            <h3 className="fonts" style={{marginBottom: "0.2em"}} >
+              {userData && userData.phone}
+            </h3>
+            <h3 className="fonts" style={{marginBottom: "0.2em"}} >
+              {userData && userData.email}
+            </h3>
             <div className="profile-card-loc">
-              <span className="profile-card-loc__icon">
+              {/* <span className="profile-card-loc__icon">
                 <svg className="icon">
-                  {/* <use xlink:href="#icon-location"></use> */}
                 </svg>
-              </span>
+              </span> */}
+                  {/* <use xlink:href="#icon-location"></use> */}
 
               <span className="profile-card-loc__txt">
-                Istanbul, Turkey
+                {""}India
               </span>
             </div>
 
@@ -48,10 +87,10 @@ export default function AboutMe() {
             </div> */}
 
 
-            <div className="profile-card-ctr">
+            {/* <div className="profile-card-ctr"> */}
               {/* <button className="profile-card__button button--blue js-message-btn">Message</button> */}
-              <button className="profile-card__button button--orange">Follow</button>
-            </div>
+              {/* <button className="profile-card__button button--orange">Follow</button> */}
+            {/* </div> */}
           </div>
 
         </div>

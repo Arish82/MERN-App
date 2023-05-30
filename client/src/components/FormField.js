@@ -4,6 +4,11 @@ import TextField from '@mui/material/TextField';
 import { InputAdornment, OutlinedInput } from '@mui/material';
 
 export default function FormField(props) {
+  const handleChange=(e)=>{
+    let name = e.target.name
+    let value = e.target.value
+    props.setuser({...props.user, [name]: value})
+  }
   return (
     <Box
       // component="form"
@@ -14,12 +19,16 @@ export default function FormField(props) {
         '& .MuiTextField-root': { m: 0.9, color: "pink"},
       }}
       noValidate
-      // autoComplete="on"
+      autoComplete="off"
     >
       <TextField
-        id=""
+        id={props.id}
+        name={props.id}
+        type={props.type}
+        value={props.user[props.id]}
         className='textfield fonts purple-color'
         label={props.label}
+        onChange={handleChange}
         sx={{
           fontFamily: "cursive",
           borderColor: "pink"

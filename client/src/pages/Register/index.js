@@ -1,29 +1,57 @@
-import * as React from 'react';
-import Paper from '@mui/material/Paper';
-import Typography from '@mui/material/Typography';
+import React, {useState} from 'react';
 import "./index.css"
 import { CardContent } from '@mui/material';
-import FormField from "../../components/FormField"
-import Button from '@mui/material/Button';
-import SendIcon from '@mui/icons-material/Send';
-import { Link } from 'react-router-dom';
-import PersonIcon from '@mui/icons-material/Person';
-import EmailIcon from '@mui/icons-material/Email';
-import WorkIcon from '@mui/icons-material/Work';
-import CallIcon from '@mui/icons-material/Call';
-import LockIcon from '@mui/icons-material/Lock';
-import LockOpenIcon from '@mui/icons-material/LockOpen';
+import { Link, useNavigate } from 'react-router-dom';
+import { PersonIcon, EmailIcon, WorkIcon, CallIcon, LockIcon, LockOpenIcon, FormField, Button, SendIcon, Paper, Typography } from "./Links"
 
-// const icons=[<PersonIcon />, <EmailIcon />, <WorkIcon />, <CallIcon />, <LockIcon />, <LockOpenIcon />]
 const icons={
   "Name"  :<PersonIcon />,
   "Email"  :<EmailIcon />,
-  "Contact"  :<WorkIcon />,
-  "Profession"  :<CallIcon />,
+  "work"  :<WorkIcon />,
+  "phone"  :<CallIcon />,
   "Password"  :<LockIcon />,
-  "CPassword"  :<LockOpenIcon />
+  "confirmPassword"  :<LockOpenIcon />
   }
 export default function Register() {
+  const [user,setuser] = useState({
+    name: "",
+    email: "",
+    phone: "",
+    work: "",
+    password: "",
+    confirmPassword: "",
+  })
+  const navigation= useNavigate();
+
+  const handlesubmit = async (e)=>{
+    e.preventDefault();
+
+    const {name, email, phone, work, password, confirmPassword} = user;
+    const res= await fetch("/register", {
+      method: "POST",
+      headers: {
+        'Content-Type': "application/json"
+      },
+      body: JSON.stringify( {
+        name : name,
+        email : email,
+        phone : phone,
+        work : work,
+        password : password,
+        confirmPassword : confirmPassword,
+      } )
+    });
+
+    const data=await res.json();
+    console.log(data, res.status);
+    if(!data || res.status===(422)){
+      window.alert("Invalid Registration");
+    }
+    else{
+      window.alert("Registration Sucessful")
+      navigation("/login")
+    }
+  }
   return (
     <div className='register-container' >
       <Paper
@@ -43,13 +71,13 @@ export default function Register() {
           <Typography sx={{textAlign: "center"}} className='heading fonts purple-color' gutterBottom variant="h4" component="div">
             Register
           </Typography>  
-          <form className='form'>
-            <FormField icon={icons["Email"]}  label="Your Email" />
-            <FormField icon={icons["Name"]}  label="Your Name" />
-            <FormField icon={icons["Contact"]}  label="Mobile Number" />
-            <FormField icon={icons["Profession"]}  label="Your Profession" />
-            <FormField icon={icons["Password"]}  label="Password" />
-            <FormField icon={icons["CPassword"]}  label="Confirm Password" />
+          <form method='POST' onSubmit={handlesubmit} className='form'>
+            <FormField type="text" id="name" icon={icons["Name"]}  label="Your Name" user={user} setuser={setuser} />
+            <FormField type="email" id="email" icon={icons["Email"]}  label="Your Email" user={user} setuser={setuser} />
+            <FormField type="phone" id="phone" icon={icons["phone"]}  label="Mobile Number" user={user} setuser={setuser} />
+            <FormField type="text" id="work" icon={icons["work"]}  label="Your Profession" user={user} setuser={setuser} />
+            <FormField type="password" id="password" icon={icons["Password"]}  label="Password" user={user} setuser={setuser} />
+            <FormField type="password" id="confirmPassword" icon={icons["confirmPassword"]}  label="Confirm Password" user={user} setuser={setuser} />
             
             <Button className='button-gradient' type="submit" style={{width: "100%", marginLeft: "0.5em",  fontSize: "1.2em"}} variant="" endIcon={<SendIcon />}>
               Register
@@ -63,6 +91,47 @@ export default function Register() {
     </div>
   );
 }
+
+// id="name"
+// id="email"
+// id="contact"
+// id="profession"
+// id="password"
+// id="cpassword"
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
